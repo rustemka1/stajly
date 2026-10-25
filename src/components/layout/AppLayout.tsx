@@ -28,6 +28,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
     { label: 'Стажировки', href: '/internships', icon: <Briefcase size={18} /> },
     { label: 'Мои заявки', href: '/my-applications', icon: <FileText size={18} /> },
     { label: 'Чек-ины', href: '/checkins', icon: <ClipboardList size={18} /> },
+    { label: 'Мой профиль', href: '/profile', icon: <Users size={18} /> },
   ]
 
   const companyNav: NavItem[] = [

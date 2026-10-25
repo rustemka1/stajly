@@ -12,6 +12,8 @@ import CompanyCheckIns from './pages/company/CompanyCheckIns'
 import Internships from './pages/student/Internships'
 import MyApplications from './pages/student/MyApplications'
 import CheckIns from './pages/student/CheckIns'
+import Profile from './pages/student/Profile'
+import StudentProfileView from './pages/StudentProfileView'
 import AllInternships from './pages/admin/AllInternships'
 import { AppLayout } from './components/layout/AppLayout'
 
@@ -74,6 +76,18 @@ function AppRoutes() {
       <Route path="/checkins" element={
         <ProtectedRoute>
           <AppLayout><CheckIns /></AppLayout>
+        </ProtectedRoute>
+      } />
+
+      <Route path="/profile" element={
+        <ProtectedRoute>
+          <AppLayout><Profile /></AppLayout>
+        </ProtectedRoute>
+      } />
+
+      <Route path="/student/:uid" element={
+        <ProtectedRoute>
+          <AppLayout><StudentProfileView /></AppLayout>
         </ProtectedRoute>
       } />
 

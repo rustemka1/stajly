@@ -7,6 +7,7 @@ export interface UserProfile {
   fullName: string;
   createdAt: number;
   skills?: string[];
+  about?: string;
   major?: string;
   university?: string;
   studentId?: string;

@@ -15,6 +15,7 @@ interface AuthContextType {
   register: (data: Partial<UserProfile> & { email: string; password: string; role: UserRole }) => Promise<void>
   logout: () => void
   loading: boolean
+  updateProfile: (data: Partial<UserProfile>) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | null>(null)
@@ -84,13 +85,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const updateProfile = async (data: Partial<UserProfile>) => {
+    if (!user) return
+    const ref = doc(db, 'users', user.uid)
+    const clean: Record<string, any> = {}
+    Object.entries(data).forEach(([k, v]) => {
+      if (v !== undefined) clean[k] = v
+    })
+    await setDoc(ref, clean, { merge: true })
+    setUser({ ...user, ...clean } as UserProfile)
+  }
+
   const logout = async () => {
     await signOut(auth)
     setUser(null)
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, register, logout, loading, updateProfile }}>
       {children}
     </AuthContext.Provider>
   )
