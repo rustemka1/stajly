@@ -1,0 +1,52 @@
+export type UserRole = 'student' | 'company' | 'admin';
+
+export interface UserProfile {
+  uid: string;
+  email: string;
+  role: UserRole;
+  fullName: string;
+  createdAt: number;
+  skills?: string[];
+  major?: string;
+  university?: string;
+  studentId?: string;
+  course?: number;
+  companyName?: string;
+  position?: string;
+}
+
+export interface Internship {
+  id: string;
+  companyId: string;
+  companyName: string;
+  title: string;
+  description: string;
+  requiredSkills: string[];
+  location: string;
+  duration: string;
+  isActive: boolean;
+  createdAt: number;
+}
+
+export interface Application {
+  id: string;
+  internshipId: string;
+  studentId: string;
+  studentName: string;
+  status: 'pending' | 'accepted' | 'rejected';
+  createdAt: number;
+  message?: string;
+}
+
+export interface CheckIn {
+  id: string;
+  applicationId: string;
+  internshipId: string;
+  studentId: string;
+  studentName: string;
+  companyId: string;
+  week: number;
+  studentNote: string;
+  mentorFeedback?: string;
+  createdAt: number;
+}
