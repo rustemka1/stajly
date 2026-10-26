@@ -1,32 +1,57 @@
-# React + TypeScript + Vite
+# Stajly — SDU Internship Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Платформа управления стажировками для студентов, компаний и университета (SDU).
 
-Currently, two official plugins are available:
+**Live:** https://stajly.vercel.app  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Стек:** React · TypeScript · Vite · Tailwind · Firebase · Vercel
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Проблема
 
-## Expanding the Oxlint configuration
+Студентам сложно находить релевантные стажировки, компаниям — отбирать кандидатов, университету — видеть, что происходит с практиками. Процесс часто разрозненный: чаты, таблицы, объявления.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Решение
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+Stajly объединяет три стороны на одной платформе:
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+| Роль | Возможности |
+|------|-------------|
+| **Студент** | Каталог стажировок, matching по skills, заявки, профиль-резюме, чек-ины, сертификат |
+| **Компания** | Публикация вакансий, просмотр профилей, accept/reject, feedback по чек-инам, completion |
+| **Admin (SDU)** | Дашборд метрик, все стажировки, список активных студентов |
+
+---
+
+## Ключевые фичи
+
+- Роли: student / company / admin  
+- Skill-based matching (% совпадения навыков)  
+- Профиль студента (headline, skills, about, контакты)  
+- Weekly check-ins + feedback ментора (closed-loop)  
+- Завершение стажировки + сертификат  
+- University dashboard с живыми цифрами  
+- Данные в Firebase (Auth + Firestore)
+
+---
+
+## Демо-сценарий (2–3 минуты)
+
+1. **Компания** — создать стажировку с skills (`React, TypeScript`)  
+2. **Студент** — заполнить профиль (те же skills) → увидеть match % → откликнуться  
+3. **Компания** — открыть профиль → принять заявку  
+4. **Студент** — отправить чек-ин  
+5. **Компания** — оставить feedback → отметить стажировку завершённой  
+6. **Студент** — открыть сертификат  
+7. **Admin** — дашборд и список студентов  
+
+Зарегистрируй три аккаунта с разными email на https://stajly.vercel.app
+
+---
+
+## Локальный запуск
+
+```bash
+npm install
+npm run dev
