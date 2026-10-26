@@ -14,6 +14,7 @@ import MyApplications from './pages/student/MyApplications'
 import CheckIns from './pages/student/CheckIns'
 import Profile from './pages/student/Profile'
 import StudentProfileView from './pages/student/StudentProfileView'
+import Certificate from './pages/student/Certificate'
 import AllInternships from './pages/admin/AllInternships'
 import Students from './pages/admin/Students'
 import { AppLayout } from './components/layout/AppLayout'
@@ -89,6 +90,12 @@ function AppRoutes() {
       <Route path="/student/:uid" element={
         <ProtectedRoute>
           <AppLayout><StudentProfileView /></AppLayout>
+        </ProtectedRoute>
+      } />
+
+      <Route path="/certificate/:applicationId" element={
+        <ProtectedRoute>
+          <AppLayout><Certificate /></AppLayout>
         </ProtectedRoute>
       } />
 

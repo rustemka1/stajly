@@ -3,23 +3,30 @@ import { useInternships } from '../../context/InternshipContext'
 import { Button } from '../../components/ui/Button'
 
 export default function Applications() {
-  const { getApplicationsForCompany, updateApplicationStatus, internships } = useInternships()
+  const {
+    getApplicationsForCompany,
+    updateApplicationStatus,
+    completeApplication,
+    internships,
+  } = useInternships()
   const apps = getApplicationsForCompany()
 
   const getTitle = (internshipId: string) => {
     return internships.find(i => i.id === internshipId)?.title || 'Стажировка'
   }
 
-  const statusLabel = {
+  const statusLabel: Record<string, string> = {
     pending: 'На рассмотрении',
     accepted: 'Принята',
     rejected: 'Отклонена',
+    completed: 'Завершена',
   }
 
-  const statusStyle = {
+  const statusStyle: Record<string, string> = {
     pending: 'bg-amber-50 text-amber-700',
     accepted: 'bg-teal-50 text-teal-700',
     rejected: 'bg-red-50 text-red-600',
+    completed: 'bg-slate-100 text-slate-700',
   }
 
   return (
@@ -61,19 +68,26 @@ export default function Applications() {
                   <span className={`text-sm font-medium px-3 py-1.5 rounded-lg ${statusStyle[app.status]}`}>
                     {statusLabel[app.status]}
                   </span>
+
                   {app.status === 'pending' && (
                     <div className="flex gap-2">
                       <Button size="sm" onClick={() => updateApplicationStatus(app.id, 'accepted')}>
                         Принять
                       </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
+                      <button
+                        type="button"
                         onClick={() => updateApplicationStatus(app.id, 'rejected')}
+                        className="text-sm px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50"
                       >
                         Отклонить
-                      </Button>
+                      </button>
                     </div>
+                  )}
+
+                  {app.status === 'accepted' && (
+                    <Button size="sm" onClick={() => completeApplication(app.id)}>
+                      Отметить завершённой
+                    </Button>
                   )}
                 </div>
               </div>

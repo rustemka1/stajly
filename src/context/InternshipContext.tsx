@@ -19,11 +19,13 @@ interface InternshipContextType {
   applyToInternship: (internshipId: string, message?: string) => Promise<void>
   getApplicationsForCompany: () => Application[]
   updateApplicationStatus: (applicationId: string, status: 'accepted' | 'rejected') => Promise<void>
+  completeApplication: (applicationId: string) => Promise<void>
   addCheckIn: (applicationId: string, studentNote: string) => Promise<void>
   addMentorFeedback: (checkInId: string, feedback: string) => Promise<void>
   getStudentCheckIns: () => CheckIn[]
   getCompanyCheckIns: () => CheckIn[]
   getAcceptedApplicationsForStudent: () => Application[]
+  getCompletedForStudent: () => Application[]
 }
 
 const InternshipContext = createContext<InternshipContextType | null>(null)
@@ -96,9 +98,21 @@ export function InternshipProvider({ children }: { children: ReactNode }) {
     await updateDoc(doc(db, 'applications', applicationId), { status })
   }
 
+  const completeApplication = async (applicationId: string) => {
+    await updateDoc(doc(db, 'applications', applicationId), {
+      status: 'completed',
+      completedAt: Date.now(),
+    })
+  }
+
   const getAcceptedApplicationsForStudent = () => {
     if (!user) return []
     return applications.filter(a => a.studentId === user.uid && a.status === 'accepted')
+  }
+
+  const getCompletedForStudent = () => {
+    if (!user) return []
+    return applications.filter(a => a.studentId === user.uid && a.status === 'completed')
   }
 
   const addCheckIn = async (applicationId: string, studentNote: string) => {
@@ -147,11 +161,13 @@ export function InternshipProvider({ children }: { children: ReactNode }) {
       applyToInternship,
       getApplicationsForCompany,
       updateApplicationStatus,
+      completeApplication,
       addCheckIn,
       addMentorFeedback,
       getStudentCheckIns,
       getCompanyCheckIns,
       getAcceptedApplicationsForStudent,
+      getCompletedForStudent,
     }}>
       {children}
     </InternshipContext.Provider>

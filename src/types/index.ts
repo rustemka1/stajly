@@ -39,9 +39,10 @@ export interface Application {
   internshipId: string;
   studentId: string;
   studentName: string;
-  status: 'pending' | 'accepted' | 'rejected';
+  status: 'pending' | 'accepted' | 'rejected' | 'completed';
   createdAt: number;
   message?: string;
+  completedAt?: number;
 }
 
 export interface CheckIn {
