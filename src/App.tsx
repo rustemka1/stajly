@@ -15,6 +15,7 @@ import CheckIns from './pages/student/CheckIns'
 import Profile from './pages/student/Profile'
 import StudentProfileView from './pages/student/StudentProfileView'
 import AllInternships from './pages/admin/AllInternships'
+import Students from './pages/admin/Students'
 import { AppLayout } from './components/layout/AppLayout'
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
@@ -99,9 +100,7 @@ function AppRoutes() {
 
       <Route path="/students" element={
         <ProtectedRoute>
-          <AppLayout>
-            <div className="text-xl font-semibold">Студенты (скоро)</div>
-          </AppLayout>
+          <AppLayout><Students /></AppLayout>
         </ProtectedRoute>
       } />
     </Routes>
