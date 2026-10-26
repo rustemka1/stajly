@@ -13,7 +13,7 @@ import Internships from './pages/student/Internships'
 import MyApplications from './pages/student/MyApplications'
 import CheckIns from './pages/student/CheckIns'
 import Profile from './pages/student/Profile'
-import StudentProfileView from './pages/StudentProfileView'
+import StudentProfileView from './pages/student/StudentProfileView'
 import AllInternships from './pages/admin/AllInternships'
 import { AppLayout } from './components/layout/AppLayout'
 

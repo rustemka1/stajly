@@ -14,6 +14,11 @@ export interface UserProfile {
   course?: number;
   companyName?: string;
   position?: string;
+  headline?: string;
+  phone?: string;
+  telegram?: string;
+  photoURL?: string;
+  experience?: string;
 }
 
 export interface Internship {
